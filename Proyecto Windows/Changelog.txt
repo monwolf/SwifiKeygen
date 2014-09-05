@@ -1,0 +1,142 @@
+Fecha 16-04-2014
+Versión 1.0.0.5
+Generadores:
+-Añadido generador de claves belkin4xx: '94:44:52','08:86:3B','EC:1A:59' 'Belkin.XXXX','Belkin_XXXXXX','belkin.xxxx','belkin.xxx'
+
+
+Fecha 28-01-2014
+Versión 1.0.0.4
+Generadores:
+-Añadido generador de claves Easybox 74:31:70, 84:9C:A6, 88:03:55, 1C:C6:3C, 50:7E:5D, 00:12:BF
+
+Fecha 06-10-2012
+Versión 1.0.0.2
+Generadores:
+-Arreglado impresión clave de las 00:1a:2b
+-Arreglado título  pantalla de error (Advertencia/error)
+
+
+Fecha 06-10-2012
+Versión 1.0.0.1
+Core:
+-Optimización Consumo de memoria en la clase generadores
+-Sustitución de funciones triviales por las estándard de las clases.
+
+
+Fecha 20-09-2012
+Versión 1.0.0.0
+Generadores:
+-Añadido segundo patron para 40:4A:03 (WLAN_XX)
+
+
+Fecha: 9-08-2012
+Versión: 0.0.99.5
+Generadores: 
+-Optimización del algoritmo del SpeedTouch
+-Optimización de mwlan.
+
+
+Fecha: 7-08-2012
+Versión: 0.0.99.5
+Core:
+-Añadido control de versiones, informa si hay una version mas actual disponible.
+
+
+
+
+Fecha: 6-08-2012
+Versión: 0.0.99.4
+Fix: Solucionado bontones negros en mono
+Fix: Solucionado tamaño de la ventana de advertencia, y cambiado el titulo.
+Generador:
+-Añadido algoritmo experimental para las JAZZTEL 00:1A:2B
+
+
+Fecha: 3-08-2012
+Versión: 0.0.99.3
+Fix: Solucionado problema de creación de ventanas. Se instancia cada vez un nuevo progressDialog
+
+Fecha: 3-08-2012
+Versión: 0.0.99.2
+Generadores:
+-Añadido mensaje de confirmación antes de generar todo el diccionairo de genTekom
+-Añadido segundo patron para 00:19:15 (Comtrend)
+
+
+
+Fecha: 3-08-2012
+Versión: 0.0.99.1
+
+
+Fix: Solucionado problema con Wlandecripter y la barra de progreso
+Fix: Solucionado problema del label en el errorBox
+
+
+
+Fecha: 2-08-2012
+Versión: 0.0.99.0
+
+Core:
+-Añadido la utilización de Threads
+-Cambio por completo del Skin del programa
+-Añadidos Forms de error, barra de progreso
+-Añadido form de Acerca de
+Generador:
+-Añadido GenTekom WLAN_XXXX MAC 00:19:15
+-Añadido segundo patrón para WLAN_XXXX 00:1A:2B
+
+
+Fecha: zz-xx-yyyy
+Version: <0.0.99.0 
+
+Redes compatibles:
+  WLAN_XX
+                       "00:60:B3"
+                       "00:01:38"
+                       "00:03:C9"
+                       "00:A0:C5"
+                       "00:16:38"
+                       "00:13:49"
+                       "00:02:CF"
+                       "00:1A:2B"
+                       "00:19:CB"
+                       "00:19:15"
+                       "00:30:DA"
+                       "00:1D:20"
+                       "00:23:F8"
+                       "00:01:36"
+                       "00:03:DA"
+                       "00:1F:9F"
+                       "E0:91:53"
+                       "40:4A:03"
+                       "50:67:F0"
+                       "C8:6C:87"
+JAZZTEL_XX
+                       "00:1A:2B"
+ThomsonXXXXXX 
+SpeedTouchXXXXXX 
+WLANXXXXXX
+WifiXXXXXX
+YaComXXXXXX
+ONOXXXX
+Dlink
+Rwlan
+Tele2
+Orange XXXXXX
+VerizonXXXXX
+mac2wepkey Infinitum
+discus
+JAzztel_XXXX
+	 	    "64:68:0C"
+		    "00:1F:A4"
+		    "00:1A:2B"  //Experimental
+		    "64:68:0C"
+WLAN_XXXX
+                    "64:68:0C"
+		    "00:1D:20"
+		    "00:1F:A4"
+		    "38:72:C0"
+		    "00:1A:2B"
+		    "F4:3E:61"
+                    "00:19:15" //Nuevas 2/08/2012
+SkyV1
