@@ -118,7 +118,8 @@
             "Belkin.XXXX",
             "Belkin_XXXXXX",
             "belkin.xxxx",
-            "belkin.xxx","WiFi-Arnet-XXXX"});
+            "belkin.xxx",
+            "WiFi-Arnet-XXXX"});
             this.tipored.Location = new System.Drawing.Point(16, 72);
             this.tipored.Name = "tipored";
             this.tipored.Size = new System.Drawing.Size(151, 21);
@@ -229,9 +230,9 @@
             this.chkAllKeys.BackColor = System.Drawing.Color.Transparent;
             this.chkAllKeys.Location = new System.Drawing.Point(182, 219);
             this.chkAllKeys.Name = "chkAllKeys";
-            this.chkAllKeys.Size = new System.Drawing.Size(122, 17);
+            this.chkAllKeys.Size = new System.Drawing.Size(106, 17);
             this.chkAllKeys.TabIndex = 15;
-            this.chkAllKeys.Text = "Todos los algoritmos";
+            this.chkAllKeys.Text = "Todas las claves";
             this.chkAllKeys.UseVisualStyleBackColor = false;
             this.chkAllKeys.Visible = false;
             // 
