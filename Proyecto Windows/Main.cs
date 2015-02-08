@@ -248,6 +248,15 @@ namespace Proyecto_Windows
                 MAC.Text = "XX:XX:XX:XX:XX:XX";
             }
 
+            else if ((string)tipored.SelectedItem == "WiFi-Arnet-XXXX")
+            {
+                chkAllKeys.Visible = true;
+                gen.gen_selected = Generadores.generadores.WiFiArnetXXXX;
+                Nombre.Text = (string)tipored.SelectedItem;
+                MAC.Text = "00:08:27:XX:XX:XX";
+            }
+           
+
         }
        
         private void WEP_CheckedChanged(object sender, EventArgs e)
@@ -280,6 +289,7 @@ namespace Proyecto_Windows
             }
         }
 
+        #region update
         private void Main_Load(object sender, EventArgs e)
         {
             #if !DEBUG           //en el debug no hace falta que de por culo el actualizador!
@@ -299,28 +309,31 @@ namespace Proyecto_Windows
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            WebClient webClient = new WebClient();
-            byte[] Archivo=null;
-            try
+            using (WebClient webClient = new WebClient())
             {
-                Archivo = webClient.DownloadData(new Uri("http://www.bitsdelocos.es/SW/SWifi_Keygen.LASTEST"));
-            }
-            catch {
-                //MessageBox.Show("Cagada");
-            }
-            if (Archivo != null) {
+                byte[] Archivo = null;
+                try
+                {
+                    Archivo = webClient.DownloadData(new Uri("http://www.bitsdelocos.es/SW/SWifi_Keygen.LASTEST"));
+                }
+                catch
+                {
+                    return;
+                }
+                if (Archivo == null) { return; }
                 String contenido = System.Text.Encoding.UTF8.GetString(Archivo);
-                String[] version=contenido.Split('.');
+                String[] version = contenido.Split('.');
                 String[] versionBinario = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString().Split('.');
 
-                int i,numVersion,numVersionBinario;
-                for (i = 0; i < version.Length; i++) {
+                int i, numVersion, numVersionBinario;
+                for (i = 0; i < version.Length; i++)
+                {
 
                     numVersion = int.Parse(version[i]);
                     numVersionBinario = int.Parse(versionBinario[i]);
 
-                    if (numVersion > numVersionBinario) {
-
+                    if (numVersion > numVersionBinario)
+                    {
                         using (swifi_keygen.newUpdate upt = new swifi_keygen.newUpdate(contenido))
                         {
                             upt.ShowDialog();
@@ -328,6 +341,9 @@ namespace Proyecto_Windows
                     }
                 }
             }
-        } 
+        }
+        
+#endregion
     }
+
 }

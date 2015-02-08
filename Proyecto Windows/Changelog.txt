@@ -1,3 +1,10 @@
+Fecha 8-02-2015
+Versión 1.0.0.6
+Generadores:
+-Añadido generador dee claves wifiarnet.py (WiFi-Arnet-XXXX): '00:08:27','00:13:C8','00:17:C2','00:19:3E','00:1C:A2','00:1D:8B','00:22:33','00:8C:54',
+    '30:39:F2','74:88:8B','84:26:15','A4:52:6F','A4:5D:A1','D0:D4:12','D4:D1:84','DC:0B:1A','F0:84:2F'
+
+
 Fecha 16-04-2014
 Versión 1.0.0.5
 Generadores:

