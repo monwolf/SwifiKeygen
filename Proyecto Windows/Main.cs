@@ -283,7 +283,7 @@ namespace Proyecto_Windows
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            using (swifi_keygen.AboutBox1 about = new swifi_keygen.AboutBox1())
+            using (swifi_keygen.AboutBox about = new swifi_keygen.AboutBox())
             {
                 about.ShowDialog();
             }
