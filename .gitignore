@@ -1,0 +1,9 @@
+#Avoid upload TFS files
+*.vssscc
+*.vspscc
+
+#Avoid upload compilation objects
+.vs/
+*/obj/*
+*/bin/*
+
