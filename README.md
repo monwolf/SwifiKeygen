@@ -1,4 +1,4 @@
-#SWifi Keygen
+# SWifi Keygen
 
 SWifi Keygen supone disponer de una ligera aplicación capaz de generar claves de acceso para redes Wi-Fi. A partir de haber introducido unos cuantos datos en el programa sobre la red a la que pretendemos acceder, SWifi Keygen generará un diccionario de posibles contraseñas válidas para permitir el acceso en un archivo de texto.
 Consigue un listado de potenciales contraseñas con pocos datos [descripción de `malavida.com`]
